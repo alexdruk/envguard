@@ -1,0 +1,14 @@
+{
+  "name": "envguard",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "npm test --workspace=packages/cli",
+    "test:cli": "npm test --workspace=packages/cli"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

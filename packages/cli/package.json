@@ -1,0 +1,26 @@
+{
+  "name": "@envguard/cli",
+  "version": "0.1.0",
+  "description": "ESLint for environment variables — enforce .env.schema documentation in your codebase",
+  "main": "src/index.js",
+  "bin": {
+    "envguard": "src/index.js"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "test:watch": "node --test --watch tests/**/*.test.js"
+  },
+  "keywords": ["env", "environment", "dotenv", "linter", "ci", "github-actions"],
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.0.0",
+    "js-yaml": "^4.1.0",
+    "glob": "^10.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

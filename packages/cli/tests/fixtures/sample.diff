@@ -1,0 +1,20 @@
+diff --git a/src/config.js b/src/config.js
+index abc1234..def5678 100644
+--- a/src/config.js
++++ b/src/config.js
+@@ -1,8 +1,14 @@
+ const express = require('express');
+ 
+-const OLD_DB_URL = process.env.DATABASE_URL;
++const NEW_DB_URL = process.env.DATABASE_URL;
++
++// New payment integration
++const stripeKey = process.env.STRIPE_SECRET_KEY;
++const webhookSecret = process.env.PAYMENT_WEBHOOK_SECRET;
+ 
+ module.exports = {
+-  db: OLD_DB_URL,
++  db: NEW_DB_URL,
++  stripe: stripeKey,
++  webhookSecret,
+ };
