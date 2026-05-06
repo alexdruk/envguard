@@ -52,4 +52,4 @@ private-key.pem
 
 # setup files
 LOCAL_SETUP.md
-GITHUB_SETUP
+GITHUB_SETUP.md
