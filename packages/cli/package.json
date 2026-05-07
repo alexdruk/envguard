@@ -8,10 +8,36 @@
   },
   "scripts": {
     "test": "node --test tests/*.test.js",
-    "test:watch": "node --test --watch tests/**/*.test.js"
+    "test:watch": "node --test --watch tests/*.test.js",
+    "prepublishOnly": "npm test"
   },
-  "keywords": ["env", "environment", "dotenv", "linter", "ci", "github-actions"],
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "env",
+    "environment-variables",
+    "dotenv",
+    "linter",
+    "cli",
+    "ci",
+    "github-actions",
+    "devtools",
+    "documentation",
+    "schema"
+  ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexdruk/envguard.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/alexdruk/envguard#readme",
+  "bugs": {
+    "url": "https://github.com/alexdruk/envguard/issues"
+  },
   "dependencies": {
     "commander": "^12.0.0",
     "js-yaml": "^4.1.0",
