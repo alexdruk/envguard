@@ -36,6 +36,18 @@ npx @envguard/cli check
 
 ---
 
+## GitHub App
+
+The EnvGuard GitHub App enforces `.env.schema` at the PR level — no CI config required. Install it on a repository and every pull request is automatically scanned. Undocumented `process.env` references fail the check with inline annotations on the exact diff lines.
+
+**Install:** [github.com/apps/envguard-alexdruk](https://github.com/apps/envguard-alexdruk)
+
+The App scans only lines added in the diff — it never flags pre-existing code. If a repo has no `.env.schema` yet, every env var in the PR is treated as undocumented. The check posts a ready-to-paste `.env.schema` stub for each violation.
+
+For self-hosting and deployment instructions, see [`packages/app/README.md`](./packages/app/README.md).
+
+---
+
 ## The `.env.schema` format
 
 ```yaml
@@ -127,7 +139,6 @@ Options:
 
 - **Destructuring is not detected.** `const { DATABASE_URL } = process.env` will not be flagged. Use direct access (`process.env.DATABASE_URL`) for EnvGuard compatibility — this is the more common pattern in most codebases.
 - **Dynamic key access is flagged as a warning, not validated.** `process.env[someVar]` will appear as a `__DYNAMIC__` notice. These must be reviewed manually.
-- **The GitHub App (PR enforcement) is Phase 2** — not yet released. The CLI works standalone today.
 
 ---
 
@@ -144,9 +155,17 @@ envguard/
 │   │   │   └── index.js        # CLI entry point
 │   │   └── tests/
 │   │
-│   └── app/                    # GitHub App server (Phase 2, coming)
-│       └── ...
+│   └── app/                    # GitHub App server (Phase 2, complete)
+│       ├── src/
+│       │   ├── server.js       # Express entry point
+│       │   ├── webhooks/       # Signature verification + PR handler
+│       │   ├── github/         # Checks API, auth, diff fetching
+│       │   ├── scanner/        # Adapter to CLI scanner
+│       │   └── db/             # Supabase client (Phase 3)
+│       ├── Dockerfile
+│       └── README.md           # Self-hosting + deployment guide
 │
+├── fly.toml                    # Fly.io deployment config
 ├── .github/workflows/ci.yml    # Tests on Node 18, 20, 22
 └── .env.schema                 # EnvGuard documents itself
 ```
@@ -156,9 +175,7 @@ envguard/
 ## Roadmap
 
 - [x] **Phase 1** — CLI (`npx envguard init`, `npx envguard check`)
-- [ ] **Phase 2** — GitHub App with PR check integration
-- [ ] **Phase 3** — Paid tier: schema drift dashboard, Slack alerts, check run history
-- [ ] **Phase 4** — GitHub Marketplace launch
+- [x] **Phase 2** — GitHub App with PR check integration
 
 ---
 
